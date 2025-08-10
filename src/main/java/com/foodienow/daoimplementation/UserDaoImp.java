@@ -139,6 +139,8 @@ public class UserDaoImp implements UserDao
         return userList;  // Return the populated list
     }
 
+    
+    //Used for Login feature to authenticate user
     @Override
     public User getUserByEmailAndPassword(String email, String password) {
         User user = null;
