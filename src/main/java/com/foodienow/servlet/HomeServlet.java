@@ -1,3 +1,4 @@
+//Handles Restaurant listing and homepage requests
 package com.foodienow.servlet;
 
 import com.foodienow.dao.RestaurantDao;

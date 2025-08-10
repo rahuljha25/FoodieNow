@@ -1,3 +1,4 @@
+//Used for Restaurant feature to fetch restaurant details
 package com.foodienow.daoimplementation;
 
 import com.foodienow.dao.RestaurantDao;
@@ -37,7 +38,7 @@ public class RestaurantDaoImp implements RestaurantDao {
     @Override
     public Restaurant getRestaurant(int restaurantId) {
         Restaurant restaurant = null;
-        String sql = "SELECT * FROM restaurant WHERE restaurant_id = ?";  // ✅ Fixed column name
+        String sql = "SELECT * FROM restaurant WHERE restaurant_id = ?";  // Fixed column name
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -82,7 +83,7 @@ public class RestaurantDaoImp implements RestaurantDao {
 
     @Override
     public void deleteRestaurant(int restaurantId) {
-        String sql = "DELETE FROM restaurant WHERE restaurant_id = ?";  // ✅ Fixed
+        String sql = "DELETE FROM restaurant WHERE restaurant_id = ?";  //  Fixed
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -117,15 +118,15 @@ public class RestaurantDaoImp implements RestaurantDao {
 
     private Restaurant mapResultSetToRestaurant(ResultSet rs) throws SQLException {
         Restaurant r = new Restaurant();
-        r.setRestaurantId(rs.getInt("restaurant_id")); // ✅ Consistent
+        r.setRestaurantId(rs.getInt("restaurant_id")); // Consistent
         r.setName(rs.getString("name"));
         r.setCuisine(rs.getString("cuisine"));
         r.setAddress(rs.getString("address"));
         r.setRating(rs.getDouble("rating"));
-        r.setImageUrl(rs.getString("image_url")); // ✅
-        r.setDeliveryTime(rs.getInt("delivery_time")); // ✅
-        r.setActive(rs.getBoolean("is_active")); // ✅
-        r.setAdminUserId(rs.getInt("admin_user_id")); // ✅
+        r.setImageUrl(rs.getString("image_url")); 
+        r.setDeliveryTime(rs.getInt("delivery_time")); 
+        r.setActive(rs.getBoolean("is_active")); 
+        r.setAdminUserId(rs.getInt("admin_user_id")); 
         return r;
     }
 }
