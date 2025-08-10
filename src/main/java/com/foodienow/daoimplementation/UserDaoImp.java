@@ -1,3 +1,4 @@
+//User Registration DAO layer
 package com.foodienow.daoimplementation;
 import com.foodienow.dao.UserDao;
 import java.sql.Connection;

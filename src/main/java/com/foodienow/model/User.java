@@ -1,3 +1,4 @@
+//User Registration Model layer
 package com.foodienow.model;
 
 import java.util.Date;

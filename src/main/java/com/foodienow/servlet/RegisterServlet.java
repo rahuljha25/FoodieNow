@@ -1,3 +1,4 @@
+//User Registration Servlet layer
 package com.foodienow.servlet;
 
 import com.foodienow.daoimplementation.UserDaoImp;
