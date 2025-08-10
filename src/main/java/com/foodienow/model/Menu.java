@@ -1,3 +1,4 @@
+//Menu Model layer
 package com.foodienow.model;
 
 public class Menu {

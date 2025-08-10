@@ -1,3 +1,4 @@
+//Menu DAO Interface
 package com.foodienow.dao;
 
 import com.foodienow.model.Menu;

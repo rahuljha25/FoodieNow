@@ -1,3 +1,4 @@
+//Handles Menu listing and menu-related requests
 package com.foodienow.servlet;
 
 import com.foodienow.dao.MenuDao;
