@@ -11,31 +11,40 @@ import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        String email = request.getParameter("email");
-        String rawPassword = request.getParameter("password");
+		String email = request.getParameter("email");
+		String rawPassword = request.getParameter("password");
 
-        // 🔒 Hash entered password before sending to DAO
-        String hashedPassword = PasswordUtil.hashPassword(rawPassword);
+		// Hash entered password before sending to DAO
+		String hashedPassword = PasswordUtil.hashPassword(rawPassword);
 
-        UserDaoImp dao = new UserDaoImp();
-        User user = dao.getUserByEmailAndPassword(email, hashedPassword);
+		UserDaoImp dao = new UserDaoImp();
+		User user = dao.getUserByEmailAndPassword(email, hashedPassword);
 
-        if (user != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("userObj", user);
+		if (user != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("userObj", user);
+			Boolean checkoutRequested = (Boolean) session.getAttribute("checkoutRequested");
 
-            if (user.getRole().equalsIgnoreCase("customer")) {
-                response.sendRedirect(request.getContextPath() + "/home");
-            } else if (user.getRole().equalsIgnoreCase("admin")) {
-                response.sendRedirect("admin.jsp");
-            }
-        } else {
-            response.sendRedirect(request.getContextPath() + "/login.jsp?error=InvalidCredentials");
-        }
-    }
+			if (checkoutRequested != null && checkoutRequested) {
+				session.removeAttribute("checkoutRequested");
+				response.sendRedirect("checkout.jsp");
+				return;
+			}
+			if (user.getRole().equalsIgnoreCase("customer")) {
+				response.sendRedirect(request.getContextPath() + "/home");
+				return;
+			} else if (user.getRole().equalsIgnoreCase("admin")) {
+				response.sendRedirect("admin.jsp");
+				return;
+			}
+		} else {
+			response.sendRedirect(request.getContextPath() + "/login.jsp?error=InvalidCredentials");
+			return;
+		}
+	}
 }
